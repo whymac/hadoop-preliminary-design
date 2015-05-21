@@ -1,0 +1,9 @@
+# since the pandas cannot be used in hadoop cluster now, test the mapper and reducer by using cloudera command line first
+
+>>>cat sample_positions.csv | python mapper_raw.py | sort -n | python reducer_raw.py
+
+# then use the data in the test_data folder to replace the return_dataframe so that there will be 20 observations
+
+>>>python mapper_create.py | sort -n | python reducer_create.py
+
+>>>python mapper_rolling.py | sort -n | python reducer_rolling.py
