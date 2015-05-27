@@ -1,0 +1,7 @@
+# cloudera 5.3 command line
+
+>>> hadoop fs -put sample_positions.csv sample_positions.csv
+
+>>> hadoop jar /usr/lib/hadoop-0.20-mapreduce/contrib/streaming/hadoop-streaming-2.5.0-mr1-cdh5.3.0.jar -D mapreduce.job.reduces=1 -file mapper.py -mapper mapper.py -file reducer.py -reducer reducer.py -input sample_positions.csv -output output
+
+>>> hadoop fs -get output output
