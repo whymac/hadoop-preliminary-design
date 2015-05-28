@@ -32,7 +32,7 @@ def parseInput():
 
 def reducer():
 	# set the number of obervations
-	num_observations = 6
+	num_observations = 4
 	market_list = [hash_function('S&P500'), hash_function('oil price')]
 	# initialize current key
 	current_key = None
@@ -48,7 +48,7 @@ def reducer():
 			continue
 		# calculate the first correlations matrix and betas using the previous methods
 		if key == current_key:
-			if current_observation <= num_observations:
+			if current_observation < num_observations:
 				x_list.append(value1)
 				y_list.append(value2)
 				x += value1
@@ -58,6 +58,7 @@ def reducer():
 				xy += value1*value2
 				num += 1
 				current_observation += 1
+				key3 = time
 			# begins to process rolling observations
 			else:
 				corr = cal_corr(x,y,xx,yy,xy,num)
@@ -70,7 +71,6 @@ def reducer():
 					beta = cal_beta(x,y,xx,xy,num)
 					print '%s,%s,%s,%s\t%.4f' % ('beta',key3,key1,key2,beta)
 				# use the last calculation result and the new value1, value2 to update the rolling correlations and betas
-				key3 = time
 				x_list.append(value1)
 				y_list.append(value2)
 				x_first = x_list.pop(0)
@@ -81,6 +81,7 @@ def reducer():
 				yy += value2*value2 - y_first*y_first
 				xy += value1*value2 - x_first*y_first
 				current_observation += 1
+				key3 = time
 		# end of processing the current key
 		else:
 			# processing the last point of the current key

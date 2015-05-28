@@ -13,14 +13,14 @@ def parseInput():
 					yield record
 
 def time_diff(time1,time2):
-    time1 = dt.strptime(time1,'%H%M%S')
-    time2 = dt.strptime(time2,'%H%M%S')
-    diff = time1 - time2
-    return diff.seconds
+	time1 = dt.strptime(time1,'%H:%M:%S')
+	time2 = dt.strptime(time2,'%H:%M:%S')
+	diff = time1 - time2
+	return diff.seconds
 
 def mapper():
 	# set the default frequency
-	frequency = 5
+	frequency = 10
 	# initialize current time
 	current_time = None
 	for record in parseInput():
